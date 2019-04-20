@@ -1,0 +1,6 @@
+﻿Biomes with more Different Chances to Tiles
+
+Desert - Remove water more Quickly
+DeepWater - never gets empty
+Swamp - slower Movement
+Cave - Hidden to Enemys

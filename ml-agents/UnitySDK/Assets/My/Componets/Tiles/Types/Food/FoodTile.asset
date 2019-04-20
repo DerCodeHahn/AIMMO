@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38bef3a3625d27849b7d31368c614f63, type: 3}
+  m_Name: FoodTile
+  m_EditorClassIdentifier: 
+  tileName: 
+  material: {fileID: 2100000, guid: 3d99d127e8675ef4198f5c2be7e6ce5f, type: 2}

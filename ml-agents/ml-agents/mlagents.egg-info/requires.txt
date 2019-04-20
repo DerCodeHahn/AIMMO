@@ -1,0 +1,13 @@
+tensorflow<1.8,>=1.7
+Pillow>=4.2.1
+matplotlib
+numpy<=1.14.5,>=1.13.3
+jupyter
+pytest<4.0.0,>=3.2.2
+docopt
+pyyaml
+protobuf<3.7,>=3.6
+grpcio<1.12.0,>=1.11.0
+
+[:platform_system == "Windows"]
+pypiwin32==223
