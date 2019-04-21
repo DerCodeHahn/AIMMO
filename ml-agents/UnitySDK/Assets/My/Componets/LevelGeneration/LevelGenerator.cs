@@ -10,6 +10,7 @@ using System.IO;
 
 public class LevelGenerator : MonoBehaviour
 {
+    #pragma warning disable 0649
     [SerializeField] WorldSize worldSize;
     [SerializeField] Tile[] tiles;
     [SerializeField] GameObject TilePrefab;
@@ -17,6 +18,7 @@ public class LevelGenerator : MonoBehaviour
     Transform worldTransfrom;
 
     [SerializeField] SavedSeed seed;
+    #pragma warning restore 0649
 
     public SavedSeed Seed { get => seed; set => seed = value; }
     public WorldSize WorldSize { get => worldSize; }
@@ -53,9 +55,9 @@ public class LevelGenerator : MonoBehaviour
                 worldTile.TileType = tiles[rndNumber];
                 worldTile.x = x;
                 worldTile.y = y;
-                newTile.transform.localScale = Vector3.one * worldSize.TileSize;
-                newTile.transform.position = new Vector3((x - worldSize.SizeX / 2) * worldSize.TileSize,
-                                                         (y - worldSize.SizeY / 2) * worldSize.TileSize, 0);
+                newTile.transform.localScale = Vector3.one;
+                newTile.transform.position = new Vector3((x - worldSize.SizeX / 2),
+                                                         (y - worldSize.SizeY / 2), 0);
                 newTile.GetComponent<MeshRenderer>().sharedMaterial = tiles[rndNumber].Material;
                 world[x, y] = newTile;
             }
@@ -70,8 +72,8 @@ public class LevelGenerator : MonoBehaviour
 
     public GameObject GetTileFromWorldPos(Vector3 pos)
     {
-        int x = Mathf.RoundToInt(((pos.x + worldSize.SizeX / 2) * worldSize.TileSize) / worldSize.TileSize);
-        int y = Mathf.RoundToInt(((pos.y + worldSize.SizeY / 2) * worldSize.TileSize) / worldSize.TileSize);
+        int x = Mathf.RoundToInt((pos.x + worldSize.SizeX / 2) * worldSize.TileSize);
+        int y = Mathf.RoundToInt((pos.y + worldSize.SizeY / 2) * worldSize.TileSize);
         return world[x, y];
     }
 }

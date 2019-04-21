@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 475958715}
   - component: {fileID: 475958714}
   - component: {fileID: 475958713}
+  - component: {fileID: 475958716}
   m_Layer: 0
   m_Name: Main Camera (1)
   m_TagString: MainCamera
@@ -163,7 +164,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -194,6 +195,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &475958716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475958712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b7a200941f729499f979a7d6628daf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelGenerator: {fileID: 722202349}
 --- !u!114 &722202349 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 874046356420365083, guid: 1c1623d786da995418e7f98c17521a99,
@@ -238,9 +252,8 @@ MonoBehaviour:
   broadcastHub:
     broadcastingBrains:
     - {fileID: 11400000, guid: 44929eaa9fa241347a7d6e6f6a667268, type: 2}
-    _brainsToControl:
-    - {fileID: 11400000, guid: 44929eaa9fa241347a7d6e6f6a667268, type: 2}
-  maxSteps: 0
+    _brainsToControl: []
+  maxSteps: 1000
   trainingConfiguration:
     width: 10
     height: 10
@@ -256,6 +269,7 @@ MonoBehaviour:
   resetParameters:
     resetParameters: []
   levelGenerator: {fileID: 722202349}
+  randomizeEachRun: 1
 --- !u!4 &1574236049
 Transform:
   m_ObjectHideFlags: 0
@@ -282,6 +296,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 874046356420365083, guid: 1c1623d786da995418e7f98c17521a99,
+        type: 3}
+      propertyPath: worldSize
+      value: 
+      objectReference: {fileID: 11400000, guid: cd1ab66ad2880af48b4f92b59d8bf06d,
+        type: 2}
     - target: {fileID: 874046356420365080, guid: 1c1623d786da995418e7f98c17521a99,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -337,12 +357,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 874046356420365083, guid: 1c1623d786da995418e7f98c17521a99,
-        type: 3}
-      propertyPath: worldSize
-      value: 
-      objectReference: {fileID: 11400000, guid: ba592ece128066343b576ad7174296d2,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c1623d786da995418e7f98c17521a99, type: 3}
 --- !u!1001 &2980067711179166148
@@ -415,6 +429,11 @@ PrefabInstance:
     - target: {fileID: 2980067710981049731, guid: edabcd0fa3fb1074e89f0ca747597f09,
         type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2980067710981049731, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
