@@ -26,8 +26,12 @@ public class MMOAgent : Agent
     float waterLevel;
 
     [SerializeField] bool MaskActions = true;
+    [SerializeField] float UseFoodEachStep = 0.1f;
+    [SerializeField] float UseWaterEachStep = 0.1f;
 
     WorldTile currentWorldTile;
+
+    public WorldTile CurrentWorldTile{get => currentWorldTile;}
 
     public float FoodLevel { get => foodLevel; set => foodLevel = value; }
     public float WaterLevel { get => waterLevel; set => waterLevel = value; }
@@ -51,12 +55,15 @@ public class MMOAgent : Agent
 
     public override void CollectObservations()
     {
+        FoodLevel -= UseFoodEachStep;
+        WaterLevel -= UseWaterEachStep;
+        
         AddVectorObs(foodLevel); // Vec ops + 1
         AddVectorObs(waterLevel); // Vec ops + 1
         //AddVectorObs()
         GameObject currentTileGameObject = academy.LevelGenerator.GetTileFromWorldPos(transform.position);
         currentWorldTile = currentTileGameObject.GetComponent<WorldTile>();
-        currentWorldTile.TileType.ActionOnMMOAgent(this);
+        currentWorldTile.ActionOnMMOAgent(this);
 
         if (MaskActions)
         {
@@ -83,7 +90,7 @@ public class MMOAgent : Agent
             SetActionMask(0, (int)MovementAction.Left);
         }
 
-        if (currentWorldTile.x >= academy.LevelGenerator.WorldSize.SizeX - 1)
+        if (currentWorldTile.x >= academy.LevelGenerator.WorldSetting.SizeX - 1)
         {
             SetActionMask(0, (int)MovementAction.Right);
         }
@@ -93,7 +100,7 @@ public class MMOAgent : Agent
             SetActionMask(0, (int)MovementAction.Down);
         }
 
-        if (currentWorldTile.y >= academy.LevelGenerator.WorldSize.SizeY - 1)
+        if (currentWorldTile.y >= academy.LevelGenerator.WorldSetting.SizeY - 1)
         {
             SetActionMask(0, (int)MovementAction.Up);
         }

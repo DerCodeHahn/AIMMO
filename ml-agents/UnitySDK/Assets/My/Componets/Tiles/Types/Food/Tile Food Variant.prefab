@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &2255742749589128844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8619275045567366165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e56fd3a39b708458239fcaa86a83d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileColor: {r: 0, g: 1, b: 0.07073355, a: 0}
+  x: 0
+  y: 0
+  FoodStorage: 1
+  FoodStorageMaximunm: 1
+  FoodStorageFillRate: 0.001
+--- !u!1001 &8381990478136777795
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 274472266885109846, guid: fa41bf65af2c3224e87488626bd38750,
+        type: 3}
+      propertyPath: m_Name
+      value: Tile Food Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645743709767580029, guid: fa41bf65af2c3224e87488626bd38750,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645743709767580029, guid: fa41bf65af2c3224e87488626bd38750,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645743709767580029, guid: fa41bf65af2c3224e87488626bd38750,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645743709767580029, guid: fa41bf65af2c3224e87488626bd38750,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645743709767580029, guid: fa41bf65af2c3224e87488626bd38750,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645743709767580029, guid: fa41bf65af2c3224e87488626bd38750,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645743709767580029, guid: fa41bf65af2c3224e87488626bd38750,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645743709767580029, guid: fa41bf65af2c3224e87488626bd38750,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645743709767580029, guid: fa41bf65af2c3224e87488626bd38750,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645743709767580029, guid: fa41bf65af2c3224e87488626bd38750,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645743709767580029, guid: fa41bf65af2c3224e87488626bd38750,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 9096884546509803842, guid: fa41bf65af2c3224e87488626bd38750, type: 3}
+    - {fileID: 224511047661501346, guid: fa41bf65af2c3224e87488626bd38750, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: fa41bf65af2c3224e87488626bd38750, type: 3}
+--- !u!1 &8619275045567366165 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 274472266885109846, guid: fa41bf65af2c3224e87488626bd38750,
+    type: 3}
+  m_PrefabInstance: {fileID: 8381990478136777795}
+  m_PrefabAsset: {fileID: 0}

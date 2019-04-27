@@ -38,13 +38,13 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -296,11 +296,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 874046356420365082, guid: 1c1623d786da995418e7f98c17521a99,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 874046356420365083, guid: 1c1623d786da995418e7f98c17521a99,
         type: 3}
       propertyPath: worldSize
       value: 
       objectReference: {fileID: 11400000, guid: cd1ab66ad2880af48b4f92b59d8bf06d,
+        type: 2}
+    - target: {fileID: 874046356420365083, guid: 1c1623d786da995418e7f98c17521a99,
+        type: 3}
+      propertyPath: worldSetting
+      value: 
+      objectReference: {fileID: 11400000, guid: d7cddf52390435543b9ff6bd28c34f28,
         type: 2}
     - target: {fileID: 874046356420365080, guid: 1c1623d786da995418e7f98c17521a99,
         type: 3}
@@ -370,6 +381,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MMOAgent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2980067710981049730, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2980067710981049740, guid: edabcd0fa3fb1074e89f0ca747597f09,
         type: 3}

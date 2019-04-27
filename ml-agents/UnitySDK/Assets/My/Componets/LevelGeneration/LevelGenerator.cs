@@ -10,58 +10,63 @@ using System.IO;
 
 public class LevelGenerator : MonoBehaviour
 {
-    #pragma warning disable 0649
-    [SerializeField] WorldSize worldSize;
-    [SerializeField] Tile[] tiles;
-    [SerializeField] GameObject TilePrefab;
+#pragma warning disable 0649
+    [SerializeField] WorldSettings worldSetting;
     GameObject[,] world;
     Transform worldTransfrom;
 
     [SerializeField] SavedSeed seed;
-    #pragma warning restore 0649
+#pragma warning restore 0649
 
     public SavedSeed Seed { get => seed; set => seed = value; }
-    public WorldSize WorldSize { get => worldSize; }
+    public WorldSettings WorldSetting { get => worldSetting; }
 
-
-    // Start is called before the first frame update
     void Start()
     {
-
         if (seed != null)
             UnityEngine.Random.state = seed.state;
         Generate();
-
     }
 
     void Generate()
     {
         worldTransfrom = new GameObject().transform;
         worldTransfrom.name = "World";
-        world = new GameObject[worldSize.SizeX, worldSize.SizeY];
-
-        for (int y = 0; y < worldSize.SizeY; y++)
+        world = new GameObject[worldSetting.SizeX, worldSetting.SizeY];
+        
+        for (int y = 0; y < worldSetting.SizeY; y++)
         {
             Transform parentTransform = new GameObject().transform;
             parentTransform.SetParent(worldTransfrom);
             parentTransform.name = "row" + y;
 
-            for (int x = 0; x < worldSize.SizeX; x++)
+            for (int x = 0; x < worldSetting.SizeX; x++)
             {
-                GameObject newTile = Instantiate(TilePrefab, parentTransform);
-                int rndNumber = UnityEngine.Random.Range(0, tiles.Length);
-                newTile.name = tiles[rndNumber].name + x;
+                GameObject newTile = Instantiate(RandomTile(), parentTransform);
+                
                 WorldTile worldTile = newTile.GetComponent<WorldTile>();
-                worldTile.TileType = tiles[rndNumber];
+
                 worldTile.x = x;
                 worldTile.y = y;
                 newTile.transform.localScale = Vector3.one;
-                newTile.transform.position = new Vector3((x - worldSize.SizeX / 2),
-                                                         (y - worldSize.SizeY / 2), 0);
-                newTile.GetComponent<MeshRenderer>().sharedMaterial = tiles[rndNumber].Material;
+                newTile.transform.position = new Vector3((x - worldSetting.SizeX / 2),
+                                                         (y - worldSetting.SizeY / 2), 0);
+                
                 world[x, y] = newTile;
             }
         }
+    }
+
+    GameObject RandomTile(){
+        int comulativeChance = 0;
+        int rndNumber = UnityEngine.Random.Range(0, 100);
+        for (int i = 0; i < worldSetting.PrefabSpawnRates.Length; i++)
+        {
+            comulativeChance += worldSetting.PrefabSpawnRates[i].Amount;
+            if(rndNumber <= comulativeChance)
+                return worldSetting.PrefabSpawnRates[i].Prefab;
+        }
+        return null;
     }
 
     internal void Regenerate()
@@ -72,8 +77,8 @@ public class LevelGenerator : MonoBehaviour
 
     public GameObject GetTileFromWorldPos(Vector3 pos)
     {
-        int x = Mathf.RoundToInt((pos.x + worldSize.SizeX / 2) * worldSize.TileSize);
-        int y = Mathf.RoundToInt((pos.y + worldSize.SizeY / 2) * worldSize.TileSize);
+        int x = Mathf.RoundToInt((pos.x + worldSetting.SizeX / 2));
+        int y = Mathf.RoundToInt((pos.y + worldSetting.SizeY / 2));
         return world[x, y];
     }
 }
