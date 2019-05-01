@@ -29,6 +29,7 @@ public class WorldSettingsEditor : Editor
         base.OnInspectorGUI();
         WorldSettings setting = (WorldSettings)target;
         int sum = 0;
+        GUILayout.Label("Number of Tiles: " + (setting.SizeX * setting.SizeY));
         foreach (PrefabSpawnRate prefSpawrate in setting.PrefabSpawnRates)
         {
             sum += prefSpawrate.Amount;

@@ -11,12 +11,10 @@ public class WorldFoodTile : WorldTile
     public override void ActionOnMMOAgent(MMOAgent agent)
     {
         float difference = 1 - agent.FoodLevel;
+        difference = Mathf.Clamp(difference, 0, FoodStorage);
         agent.AddReward(difference);
-        agent.FoodLevel += difference;
         FoodStorage -= difference;
-
-        if (agent.FoodLevel > 1)
-            agent.FoodLevel = 1;
+        agent.FoodLevel += difference;
 
         if (agent.CurrentWorldTile != null)
         {

@@ -253,12 +253,12 @@ MonoBehaviour:
     broadcastingBrains:
     - {fileID: 11400000, guid: 44929eaa9fa241347a7d6e6f6a667268, type: 2}
     _brainsToControl: []
-  maxSteps: 1000
+  maxSteps: 2000
   trainingConfiguration:
     width: 10
     height: 10
     qualityLevel: 1
-    timeScale: 1
+    timeScale: 70.4
     targetFrameRate: 10
   inferenceConfiguration:
     width: 20
@@ -306,12 +306,6 @@ PrefabInstance:
       propertyPath: worldSize
       value: 
       objectReference: {fileID: 11400000, guid: cd1ab66ad2880af48b4f92b59d8bf06d,
-        type: 2}
-    - target: {fileID: 874046356420365083, guid: 1c1623d786da995418e7f98c17521a99,
-        type: 3}
-      propertyPath: worldSetting
-      value: 
-      objectReference: {fileID: 11400000, guid: d7cddf52390435543b9ff6bd28c34f28,
         type: 2}
     - target: {fileID: 874046356420365080, guid: 1c1623d786da995418e7f98c17521a99,
         type: 3}
@@ -451,6 +445,11 @@ PrefabInstance:
         type: 3}
       propertyPath: agentParameters.numberOfActionsBetweenDecisions
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2980067710981049731, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
+      propertyPath: UseFoodEachStep
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edabcd0fa3fb1074e89f0ca747597f09, type: 3}

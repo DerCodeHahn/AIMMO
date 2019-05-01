@@ -31,7 +31,7 @@ public class MMOAgent : Agent
 
     WorldTile currentWorldTile;
 
-    public WorldTile CurrentWorldTile{get => currentWorldTile;}
+    public WorldTile CurrentWorldTile { get => currentWorldTile; }
 
     public float FoodLevel { get => foodLevel; set => foodLevel = value; }
     public float WaterLevel { get => waterLevel; set => waterLevel = value; }
@@ -57,7 +57,7 @@ public class MMOAgent : Agent
     {
         FoodLevel -= UseFoodEachStep;
         WaterLevel -= UseWaterEachStep;
-        
+
         AddVectorObs(foodLevel); // Vec ops + 1
         AddVectorObs(waterLevel); // Vec ops + 1
         //AddVectorObs()
@@ -110,6 +110,7 @@ public class MMOAgent : Agent
     {
         if (foodLevel <= 0 || waterLevel <= 0)
         {
+            Debug.Log(foodLevel <= 0 ? "Tot durch kein Essen" : "Tot durch kein Trinken");
             Die();
             return;
         }

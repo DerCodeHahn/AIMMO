@@ -43,18 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c46fd88fb609554696089c8b3e7bc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldSize: {fileID: 11400000, guid: ba592ece128066343b576ad7174296d2, type: 2}
-  tiles:
-  - {fileID: 11400000, guid: 3a747bf3088e0444c87a4dda7747c8c2, type: 2}
-  - {fileID: 11400000, guid: 3a747bf3088e0444c87a4dda7747c8c2, type: 2}
-  - {fileID: 11400000, guid: 3a747bf3088e0444c87a4dda7747c8c2, type: 2}
-  - {fileID: 11400000, guid: 3a747bf3088e0444c87a4dda7747c8c2, type: 2}
-  - {fileID: 11400000, guid: 3a747bf3088e0444c87a4dda7747c8c2, type: 2}
-  - {fileID: 11400000, guid: 3a747bf3088e0444c87a4dda7747c8c2, type: 2}
-  - {fileID: 11400000, guid: 3a747bf3088e0444c87a4dda7747c8c2, type: 2}
-  - {fileID: 11400000, guid: 3a747bf3088e0444c87a4dda7747c8c2, type: 2}
-  - {fileID: 11400000, guid: aacf388d13c03f141a88d3610fb90f36, type: 2}
-  - {fileID: 11400000, guid: 1ec11e6c437d0aa41a2030076ba0e6d4, type: 2}
-  TilePrefab: {fileID: 274472266885109846, guid: fa41bf65af2c3224e87488626bd38750,
-    type: 3}
+  worldSetting: {fileID: 11400000, guid: d7cddf52390435543b9ff6bd28c34f28, type: 2}
   seed: {fileID: 0}

@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: e637e19d44dc52046b4b9d978a7c0575
+ScriptedImporter:
+  fileIDToRecycleName:
+    11400002: Assets/My/Componets/Learning/TFNetwork/LimitedRescources.nn
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 83221ad3db87f4b3b91b041047cb2bc5, type: 3}

@@ -17,7 +17,7 @@ MonoBehaviour:
   y: 0
   FoodStorage: 1
   FoodStorageMaximunm: 1
-  FoodStorageFillRate: 0.001
+  FoodStorageFillRate: 0.01
 --- !u!1001 &8381990478136777795
 PrefabInstance:
   m_ObjectHideFlags: 0
