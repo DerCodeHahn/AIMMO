@@ -451,5 +451,10 @@ PrefabInstance:
       propertyPath: UseFoodEachStep
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 2980067710981049731, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
+      propertyPath: UseWaterEachStep
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edabcd0fa3fb1074e89f0ca747597f09, type: 3}

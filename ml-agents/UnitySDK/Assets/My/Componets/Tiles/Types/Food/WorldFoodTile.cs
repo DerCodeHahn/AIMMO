@@ -18,16 +18,23 @@ public class WorldFoodTile : WorldTile
 
         if (agent.CurrentWorldTile != null)
         {
-            Color currentColor = tileColor;
-            currentColor.g = FoodStorage / FoodStorageMaximunm;
-            SetMaterialPropertyColor(currentColor);
+            UpdateColor();
         }
     }
-    private void Update()
+
+    private void UpdateColor()
+    {
+        Color currentColor = tileColor;
+        currentColor.g = FoodStorage / FoodStorageMaximunm;
+        SetMaterialPropertyColor(currentColor);
+    }
+
+    private void FixedUpdate()
     {
         if (FoodStorage < FoodStorageMaximunm)
         {
             FoodStorage += FoodStorageFillRate;
+            UpdateColor();
         }
     }
 }
