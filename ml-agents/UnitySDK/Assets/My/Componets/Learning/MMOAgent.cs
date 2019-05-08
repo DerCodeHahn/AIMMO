@@ -17,9 +17,9 @@ public class MMOAgent : Agent
 
     public enum InterAction
     {
-        None = 5,
-        Attack = 6,
-        Share = 7
+        None = 0,
+        Attack = 1,
+        Share = 2
     }
     MMOAcademy academy;
     float foodLevel;
@@ -41,7 +41,12 @@ public class MMOAgent : Agent
         foodLevel = 1;
         waterLevel = 1;
         transform.position = Vector3.zero;
-        academy.AcademyReset();
+        //academy.AcademyReset();
+        if(!academy.GetIsInference())
+        {
+            UseWaterEachStep = academy.resetParameters["WaterConsume"];
+            UseFoodEachStep = academy.resetParameters["FoodConsume"];
+        }
     }
     public override void InitializeAgent()
     {
@@ -57,10 +62,9 @@ public class MMOAgent : Agent
     {
         FoodLevel -= UseFoodEachStep;
         WaterLevel -= UseWaterEachStep;
-
+        
         AddVectorObs(foodLevel); // Vec ops + 1
         AddVectorObs(waterLevel); // Vec ops + 1
-        //AddVectorObs()
         GameObject currentTileGameObject = academy.LevelGenerator.GetTileFromWorldPos(transform.position);
         currentWorldTile = currentTileGameObject.GetComponent<WorldTile>();
         currentWorldTile.ActionOnMMOAgent(this);
@@ -104,6 +108,8 @@ public class MMOAgent : Agent
         {
             SetActionMask(0, (int)MovementAction.Up);
         }
+        SetActionMask(1, (int)InterAction.Attack);
+        SetActionMask(1, (int)InterAction.Share);
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
@@ -115,7 +121,7 @@ public class MMOAgent : Agent
             return;
         }
 
-        AddReward(0.1f);
+        AddReward(0.001f);
 
         int movement = Mathf.FloorToInt(vectorAction[0]);
 
@@ -146,6 +152,7 @@ public class MMOAgent : Agent
     private void Die()
     {
         Done();
+        academy.Done();
         SetReward(-1f);
     }
 

@@ -252,13 +252,14 @@ MonoBehaviour:
   broadcastHub:
     broadcastingBrains:
     - {fileID: 11400000, guid: 44929eaa9fa241347a7d6e6f6a667268, type: 2}
-    _brainsToControl: []
-  maxSteps: 2000
+    _brainsToControl:
+    - {fileID: 11400000, guid: 44929eaa9fa241347a7d6e6f6a667268, type: 2}
+  maxSteps: 0
   trainingConfiguration:
-    width: 10
-    height: 10
+    width: 100
+    height: 100
     qualityLevel: 1
-    timeScale: 70.4
+    timeScale: 100
     targetFrameRate: 10
   inferenceConfiguration:
     width: 20
@@ -284,6 +285,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1619134517 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
+    type: 3}
+  m_PrefabInstance: {fileID: 2980067711179166148}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &874046355698542070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -381,6 +388,41 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
+      propertyPath: m_AllowMSAA
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
+      propertyPath: m_HDR
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
+      propertyPath: orthographic size
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2980067710981049740, guid: edabcd0fa3fb1074e89f0ca747597f09,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -438,6 +480,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2980067710981049731, guid: edabcd0fa3fb1074e89f0ca747597f09,
         type: 3}
+      propertyPath: agentParameters.agentCameras.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2980067710981049731, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -456,5 +503,10 @@ PrefabInstance:
       propertyPath: UseWaterEachStep
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 2980067710981049731, guid: edabcd0fa3fb1074e89f0ca747597f09,
+        type: 3}
+      propertyPath: agentParameters.agentCameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 1619134517}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edabcd0fa3fb1074e89f0ca747597f09, type: 3}

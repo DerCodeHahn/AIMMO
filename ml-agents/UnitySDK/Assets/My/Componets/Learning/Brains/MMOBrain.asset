@@ -24,5 +24,5 @@ MonoBehaviour:
     - Movement
     - Interaction
     vectorActionSpaceType: 0
-  model: {fileID: 11400000, guid: 387987d7971a9c64d8e51d6fc6b7586c, type: 3}
+  model: {fileID: 11400000, guid: 6281a74d4195bef4aa4706529a78e249, type: 3}
   inferenceDevice: 1
