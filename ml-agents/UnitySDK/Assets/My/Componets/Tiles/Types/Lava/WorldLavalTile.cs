@@ -6,8 +6,7 @@ public class WorldLavalTile : WorldTile
 {
     public override void ActionOnMMOAgent(MMOAgent agent)
     {
-        agent.Done();
-        agent.SetReward(-1);
+        agent.Die();
         Debug.Log("Tot durch Lava");
     }
 }

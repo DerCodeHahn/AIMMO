@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 86eb62753b4c99141b151fcb8819414e
+ScriptedImporter:
+  fileIDToRecycleName:
+    11400002: Assets/My/Componets/Learning/TFNetwork/NormalizedWorldCameraResolution64.nn
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 83221ad3db87f4b3b91b041047cb2bc5, type: 3}

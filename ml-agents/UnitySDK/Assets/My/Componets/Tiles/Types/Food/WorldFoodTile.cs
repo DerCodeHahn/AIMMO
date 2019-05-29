@@ -5,7 +5,7 @@ using UnityEngine;
 public class WorldFoodTile : WorldTile
 {
     [SerializeField] float FoodStorage = 1;
-    [SerializeField] float FoodStorageMaximunm = 1;
+    [SerializeField] float FoodStorageMaximum = 1;
     [SerializeField] float FoodStorageFillRate = 0.01f;
 
     public override void ActionOnMMOAgent(MMOAgent agent)
@@ -25,16 +25,22 @@ public class WorldFoodTile : WorldTile
     private void UpdateColor()
     {
         Color currentColor = tileColor;
-        currentColor.g = FoodStorage / FoodStorageMaximunm;
+        currentColor.g = FoodStorage / FoodStorageMaximum;
         SetMaterialPropertyColor(currentColor);
     }
 
     private void FixedUpdate()
     {
-        if (FoodStorage < FoodStorageMaximunm)
+        if (FoodStorage < FoodStorageMaximum)
         {
             FoodStorage += FoodStorageFillRate;
             UpdateColor();
         }
+    }
+
+    public override void ResetTile()
+    {
+        FoodStorage = FoodStorageMaximum;
+        UpdateColor();
     }
 }

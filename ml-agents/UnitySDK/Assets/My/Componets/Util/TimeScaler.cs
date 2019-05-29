@@ -16,7 +16,5 @@ public class TimeScaler : MonoBehaviour
             timeScale = float.Parse(GUILayout.TextField("" + timeScale));
             Time.timeScale = timeScale;
         }
-
-
     }
 }

@@ -20,59 +20,83 @@ public class LevelGenerator : MonoBehaviour
 
     public SavedSeed Seed { get => seed; set => seed = value; }
     public WorldSettings WorldSetting { get => worldSetting; }
-
+    List<GameObject> WorldBluePrint;
     void Start()
     {
         if (seed != null)
             UnityEngine.Random.state = seed.state;
-        Generate();
+        Init();
+        UpdateWorld();
     }
 
-    void Generate()
+    void Init()
     {
         worldTransfrom = new GameObject().transform;
         worldTransfrom.name = "World";
         world = new GameObject[worldSetting.SizeX, worldSetting.SizeY];
-        
+        WorldBluePrint = new List<GameObject>();
+
         for (int y = 0; y < worldSetting.SizeY; y++)
         {
             Transform parentTransform = new GameObject().transform;
             parentTransform.SetParent(worldTransfrom);
             parentTransform.name = "row" + y;
+        }
+        foreach (PrefabSpawnRate prefabSpawnRate in worldSetting.PrefabSpawnRates)
+        {
+            int amount = (int)(((float)prefabSpawnRate.Amount / 100f) * worldSetting.SizeX * worldSetting.SizeY);
+            for (int i = 0; i < amount; i++)
+                WorldBluePrint.Add(Instantiate(prefabSpawnRate.Prefab));
 
-            for (int x = 0; x < worldSetting.SizeX; x++)
-            {
-                GameObject newTile = Instantiate(RandomTile(), parentTransform);
-                
-                WorldTile worldTile = newTile.GetComponent<WorldTile>();
+        }
+        while (WorldBluePrint.Count < worldSetting.SizeX * worldSetting.SizeY)
+        {
+            WorldBluePrint.Add(Instantiate(worldSetting.PrefabSpawnRates[0].Prefab));
+        }
 
-                worldTile.x = x;
-                worldTile.y = y;
-                newTile.transform.localScale = Vector3.one;
-                newTile.transform.position = new Vector3((x - worldSetting.SizeX / 2),
-                                                         (y - worldSetting.SizeY / 2), 0);
-                
-                world[x, y] = newTile;
-            }
+        Shuffle(WorldBluePrint);
+    }
+    void Shuffle<T>(IList<T> ts)
+    {
+        var count = ts.Count;
+        var last = count - 1;
+        for (var i = 0; i < last; ++i)
+        {
+            var r = UnityEngine.Random.Range(i, count);
+            var tmp = ts[i];
+            ts[i] = ts[r];
+            ts[r] = tmp;
         }
     }
 
-    GameObject RandomTile(){
-        int comulativeChance = 0;
-        int rndNumber = UnityEngine.Random.Range(0, 100);
-        for (int i = 0; i < worldSetting.PrefabSpawnRates.Length; i++)
+    void UpdateWorld()
+    {
+        IEnumerator<GameObject> blueprintEnumerable = WorldBluePrint.GetEnumerator();
+        blueprintEnumerable.MoveNext();
+        for (int y = 0; y < worldSetting.SizeY; y++)
         {
-            comulativeChance += worldSetting.PrefabSpawnRates[i].Amount;
-            if(rndNumber <= comulativeChance)
-                return worldSetting.PrefabSpawnRates[i].Prefab;
+            for (int x = 0; x < worldSetting.SizeX; x++)
+            {
+                GameObject newTile = blueprintEnumerable.Current;
+                blueprintEnumerable.MoveNext();
+                WorldTile worldTile = newTile.GetComponent<WorldTile>();
+                newTile.transform.SetParent(worldTransfrom.GetChild(y));
+                worldTile.x = x;
+                worldTile.y = y;
+                worldTile.ResetTile();
+                newTile.transform.localScale = Vector3.one;
+                newTile.transform.position = new Vector3((x - worldSetting.SizeX / 2),
+                                                         (y - worldSetting.SizeY / 2), 0);
+                world[x, y] = newTile;
+            }
         }
-        return null;
+
     }
 
     internal void Regenerate()
     {
-        Destroy(worldTransfrom.gameObject);
-        Generate();
+        Shuffle(WorldBluePrint);
+        UpdateWorld();
     }
 
     public GameObject GetTileFromWorldPos(Vector3 pos)

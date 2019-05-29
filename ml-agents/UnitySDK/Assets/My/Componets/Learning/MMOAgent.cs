@@ -149,7 +149,7 @@ public class MMOAgent : Agent
         }
     }
 
-    private void Die()
+    public void Die()
     {
         Done();
         academy.Done();

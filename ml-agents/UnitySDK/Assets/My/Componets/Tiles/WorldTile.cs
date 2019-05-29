@@ -26,4 +26,8 @@ public class WorldTile : MonoBehaviour
     {
 
     }
+
+    public virtual void ResetTile(){
+        
+    }
 }

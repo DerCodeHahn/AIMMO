@@ -1,0 +1,11 @@
+{
+    "measure" : "progress",
+    "thresholds" : [0.05, 0.1, 0.3, 0.5],
+    "min_lesson_length": 100,
+    "signal_smoothing" : true, 
+    "parameters" : 
+    {
+        "WaterConsume" : [0.01, 0.02, 0.05,  0.075, 0.1],
+        "FoodConsume" : [0.01, 0.015, 0.02, 0.05, 0.05]
+    }
+}

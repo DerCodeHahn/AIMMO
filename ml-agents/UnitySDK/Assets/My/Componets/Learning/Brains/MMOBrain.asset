@@ -17,12 +17,12 @@ MonoBehaviour:
     numStackedVectorObservations: 1
     vectorActionSize: 0500000003000000
     cameraResolutions:
-    - width: 32
-      height: 32
+    - width: 64
+      height: 64
       blackAndWhite: 0
     vectorActionDescriptions:
     - Movement
     - Interaction
     vectorActionSpaceType: 0
-  model: {fileID: 11400000, guid: 6281a74d4195bef4aa4706529a78e249, type: 3}
+  model: {fileID: 11400002, guid: 86eb62753b4c99141b151fcb8819414e, type: 3}
   inferenceDevice: 1

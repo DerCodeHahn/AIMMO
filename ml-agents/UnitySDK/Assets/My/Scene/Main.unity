@@ -252,12 +252,11 @@ MonoBehaviour:
   broadcastHub:
     broadcastingBrains:
     - {fileID: 11400000, guid: 44929eaa9fa241347a7d6e6f6a667268, type: 2}
-    _brainsToControl:
-    - {fileID: 11400000, guid: 44929eaa9fa241347a7d6e6f6a667268, type: 2}
+    _brainsToControl: []
   maxSteps: 0
   trainingConfiguration:
-    width: 100
-    height: 100
+    width: 300
+    height: 300
     qualityLevel: 1
     timeScale: 100
     targetFrameRate: 10
@@ -268,7 +267,11 @@ MonoBehaviour:
     timeScale: 1
     targetFrameRate: 60
   resetParameters:
-    resetParameters: []
+    resetParameters:
+    - key: WaterConsume
+      value: 0.05
+    - key: FoodConsume
+      value: 0.05
   levelGenerator: {fileID: 722202349}
   randomizeEachRun: 1
 --- !u!4 &1574236049
@@ -291,6 +294,49 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 2980067711179166148}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1933359385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1933359387}
+  - component: {fileID: 1933359386}
+  m_Layer: 0
+  m_Name: UITimeScaler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1933359386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933359385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a1a099878cbae429c8f265a1879ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1933359387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933359385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &874046355698542070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -313,6 +359,12 @@ PrefabInstance:
       propertyPath: worldSize
       value: 
       objectReference: {fileID: 11400000, guid: cd1ab66ad2880af48b4f92b59d8bf06d,
+        type: 2}
+    - target: {fileID: 874046356420365083, guid: 1c1623d786da995418e7f98c17521a99,
+        type: 3}
+      propertyPath: worldSetting
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ceeafd5fb087224684e651ba2cbe74c,
         type: 2}
     - target: {fileID: 874046356420365080, guid: 1c1623d786da995418e7f98c17521a99,
         type: 3}
@@ -390,21 +442,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
         type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
-        type: 3}
       propertyPath: m_AllowDynamicResolution
       value: 0
       objectReference: {fileID: 0}
@@ -417,11 +454,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_HDR
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5583205252464525546, guid: edabcd0fa3fb1074e89f0ca747597f09,
-        type: 3}
-      propertyPath: orthographic size
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2980067710981049740, guid: edabcd0fa3fb1074e89f0ca747597f09,
         type: 3}

@@ -11,7 +11,7 @@ public class WorldDependCameraSize : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Camera>().orthographicSize = LevelGenerator.WorldSetting.SizeY / 2;
+        GetComponent<Camera>().orthographicSize = LevelGenerator.WorldSetting.SizeY / 2 + 0.5f;
     }
 
     // Update is called once per frame
