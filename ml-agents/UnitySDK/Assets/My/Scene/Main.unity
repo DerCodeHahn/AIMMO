@@ -302,8 +302,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broadcastHub:
     broadcastingBrains:
+    - {fileID: 11400000, guid: 302fc2523d496af4088b7563fde17a2d, type: 2}
+    _brainsToControl:
     - {fileID: 11400000, guid: 44929eaa9fa241347a7d6e6f6a667268, type: 2}
-    _brainsToControl: []
   maxSteps: 3000
   trainingConfiguration:
     width: 300
@@ -409,7 +410,7 @@ PrefabInstance:
         type: 3}
       propertyPath: worldSetting
       value: 
-      objectReference: {fileID: 11400000, guid: 7ceeafd5fb087224684e651ba2cbe74c,
+      objectReference: {fileID: 11400000, guid: 6687545100262a34399b1d9bedfe89e7,
         type: 2}
     - target: {fileID: 874046356420365083, guid: 1c1623d786da995418e7f98c17521a99,
         type: 3}
