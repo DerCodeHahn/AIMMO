@@ -17,14 +17,14 @@ MonoBehaviour:
   PrefabSpawnRates:
   - name: Empty
     Prefab: {fileID: 274472266885109846, guid: fa41bf65af2c3224e87488626bd38750, type: 3}
-    Amount: 88
-  - name: Food
+    Amount: 78
+  - name: FoodSpawnRate
     Prefab: {fileID: 8619275045567366165, guid: 1fc722faf41e5604298fd6b6a4cd71a4,
       type: 3}
-    Amount: 5
-  - name: Water
+    Amount: 10
+  - name: WaterSpawnRate
     Prefab: {fileID: 307115639763579112, guid: cf7ca1021e653714ea91415488743d27, type: 3}
-    Amount: 5
+    Amount: 10
   - name: Lava
     Prefab: {fileID: 7740190604719763554, guid: c3ec98a71f3d0854985fe675a8ad3ac2,
       type: 3}

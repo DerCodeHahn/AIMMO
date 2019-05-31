@@ -41,12 +41,6 @@ public class MMOAgent : Agent
         foodLevel = 1;
         waterLevel = 1;
         transform.position = Vector3.zero;
-        //academy.AcademyReset();
-        if(!academy.GetIsInference())
-        {
-            UseWaterEachStep = academy.resetParameters["WaterConsume"];
-            UseFoodEachStep = academy.resetParameters["FoodConsume"];
-        }
     }
     public override void InitializeAgent()
     {
@@ -108,8 +102,7 @@ public class MMOAgent : Agent
         {
             SetActionMask(0, (int)MovementAction.Up);
         }
-        SetActionMask(1, (int)InterAction.Attack);
-        SetActionMask(1, (int)InterAction.Share);
+
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
@@ -124,8 +117,6 @@ public class MMOAgent : Agent
         AddReward(0.001f);
 
         int movement = Mathf.FloorToInt(vectorAction[0]);
-
-
 
         switch ((MovementAction)movement)
         {

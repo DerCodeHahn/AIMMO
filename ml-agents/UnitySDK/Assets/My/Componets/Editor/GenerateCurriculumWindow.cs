@@ -81,7 +81,7 @@ public class GenerateCurriculumWindow : EditorWindow
         string filedata = File.ReadAllText(XmlPath);
         data = JsonConvert.DeserializeObject<CurriculumData>(filedata);
 
-        levelCount = data.thresholds.Length;
+        levelCount = data.thresholds.Length + 1;
 
         // Reset old Graphs
         foodSpawnRate.keys = new Keyframe[0];
@@ -96,11 +96,12 @@ public class GenerateCurriculumWindow : EditorWindow
             foodSpawnRate.AddKey(amount, data.parameters[foodRateName][i]);
             waterSpawnRate.AddKey(amount, data.parameters[waterRateName][i]);
         }
+        Debug.Log("Loaded Selected Data");
     }
 
     void Save()
     {
-        data.thresholds = new float[levelCount];
+        data.thresholds = new float[levelCount - 1];
         data.parameters.Remove(foodRateName); // Empty data
         data.parameters.Remove(waterRateName);
 
@@ -110,7 +111,8 @@ public class GenerateCurriculumWindow : EditorWindow
         for (int i = 0; i < levelCount; i++)
         {
             float amount = (float)i / (float)(levelCount - 1);
-            data.thresholds[i] = nextLevelThreshold.Evaluate(amount);
+            if (i < levelCount - 1)
+                data.thresholds[i] = nextLevelThreshold.Evaluate(amount);
             data.parameters[foodRateName][i] = foodSpawnRate.Evaluate(amount);
             data.parameters[waterRateName][i] = waterSpawnRate.Evaluate(amount);
         }
@@ -119,6 +121,9 @@ public class GenerateCurriculumWindow : EditorWindow
         fileStream.Write(jsonData);
         fileStream.Flush();
         fileStream.Close();
+
+        Debug.Log("Saved Selected Data");
+
     }
 }
 

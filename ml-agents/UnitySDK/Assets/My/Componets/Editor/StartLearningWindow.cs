@@ -28,6 +28,7 @@ public class StartLearningWindow : EditorWindow
         // process.StartInfo.Arguments = "-c \"activate ml-agents\n\"";
         process.Start();
         process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
         messageStream = process.StandardInput;
         //proc.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
