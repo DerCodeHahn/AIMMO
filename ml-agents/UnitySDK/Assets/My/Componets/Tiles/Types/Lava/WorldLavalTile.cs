@@ -7,6 +7,7 @@ public class WorldLavalTile : WorldTile
     public override void ActionOnMMOAgent(MMOAgent agent)
     {
         agent.Die();
-        Debug.Log("Tot durch Lava");
+        string step = MMOAcademy.instance.GetStepCount() + " ";
+        Debug.Log(step + "Lava Death");
     }
 }

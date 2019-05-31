@@ -14,13 +14,6 @@ public class MMOAgent : Agent
         Left = 3,
         Right = 4
     }
-
-    public enum InterAction
-    {
-        None = 0,
-        Attack = 1,
-        Share = 2
-    }
     MMOAcademy academy;
     float foodLevel;
     float waterLevel;
@@ -56,7 +49,7 @@ public class MMOAgent : Agent
     {
         FoodLevel -= UseFoodEachStep;
         WaterLevel -= UseWaterEachStep;
-        
+
         AddVectorObs(foodLevel); // Vec ops + 1
         AddVectorObs(waterLevel); // Vec ops + 1
         GameObject currentTileGameObject = academy.LevelGenerator.GetTileFromWorldPos(transform.position);
@@ -81,8 +74,6 @@ public class MMOAgent : Agent
     private void SetMask()
     {
         // Prevents the agent from picking an action that would make it collide with a wall
-
-
         if (currentWorldTile.x <= 0)
         {
             SetActionMask(0, (int)MovementAction.Left);
@@ -109,7 +100,9 @@ public class MMOAgent : Agent
     {
         if (foodLevel <= 0 || waterLevel <= 0)
         {
-            Debug.Log(foodLevel <= 0 ? "Tot durch kein Essen" : "Tot durch kein Trinken");
+            string deathCause = foodLevel <= 0 ? "FoodDeath" : "WaterDeath";
+            string step = MMOAcademy.instance.GetStepCount() + " ";
+            Debug.Log(step + deathCause);
             Die();
             return;
         }
