@@ -14,18 +14,117 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SizeX: 50
   SizeY: 50
+  emptyTile: {fileID: 274472266885109846, guid: fa41bf65af2c3224e87488626bd38750,
+    type: 3}
   PrefabSpawnRates:
-  - name: Empty
-    Prefab: {fileID: 274472266885109846, guid: fa41bf65af2c3224e87488626bd38750, type: 3}
-    Amount: 78
   - name: FoodSpawnRate
     Prefab: {fileID: 8619275045567366165, guid: 1fc722faf41e5604298fd6b6a4cd71a4,
       type: 3}
-    Amount: 10
+    staticAmount: 30
+    curriculumSpawnRates:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 35.21801
+        inSlope: -13.217481
+        outSlope: -13.217481
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.10719755
+      - serializedVersion: 3
+        time: 1
+        value: 2
+        inSlope: -6.7916455
+        outSlope: -6.7916455
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   - name: WaterSpawnRate
     Prefab: {fileID: 307115639763579112, guid: cf7ca1021e653714ea91415488743d27, type: 3}
-    Amount: 10
+    staticAmount: 30
+    curriculumSpawnRates:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 35.21801
+        inSlope: -103.39394
+        outSlope: -103.39394
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.033690657
+      - serializedVersion: 3
+        time: 1
+        value: 2
+        inSlope: -6.7916455
+        outSlope: -6.7916455
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   - name: Lava
     Prefab: {fileID: 7740190604719763554, guid: c3ec98a71f3d0854985fe675a8ad3ac2,
       type: 3}
-    Amount: 2
+    staticAmount: 2
+    curriculumSpawnRates:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - name: Stone
+    Prefab: {fileID: 7740190604719763554, guid: 353cc1d0482e75d4b9069b185f38dd8c,
+      type: 3}
+    staticAmount: 10
+    curriculumSpawnRates:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 10
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 10
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4

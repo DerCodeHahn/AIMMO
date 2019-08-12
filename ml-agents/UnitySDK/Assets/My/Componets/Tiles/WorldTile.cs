@@ -30,4 +30,9 @@ public class WorldTile : MonoBehaviour
     public virtual void ResetTile(){
         
     }
+
+    public virtual Resource GetResource()
+    {
+        return new Resource();
+    }
 }

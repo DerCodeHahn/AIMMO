@@ -43,4 +43,11 @@ public class WorldFoodTile : WorldTile
         FoodStorage = FoodStorageMaximum;
         UpdateColor();
     }
+
+    public override Resource GetResource()
+    {
+        Resource r = new Resource();
+        r.Food = FoodStorage;
+        return r;
+    }
 }

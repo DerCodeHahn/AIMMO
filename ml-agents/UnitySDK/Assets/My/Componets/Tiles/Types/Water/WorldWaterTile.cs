@@ -10,4 +10,10 @@ public class WorldWaterTile : WorldTile
         agent.AddReward(difference);
         agent.WaterLevel += difference;
     }
+    public override Resource GetResource()
+    {
+        Resource r = new Resource();
+        r.Wood = 1;
+        return r;
+    }
 }

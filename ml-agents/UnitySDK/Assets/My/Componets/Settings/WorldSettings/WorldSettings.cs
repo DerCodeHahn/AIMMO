@@ -9,6 +9,7 @@ using UnityEditor;
 public class WorldSettings : ScriptableObject
 {
     public int SizeX, SizeY;
+    public GameObject emptyTile;
     public PrefabSpawnRate[] PrefabSpawnRates;
 }
 [System.Serializable]
@@ -16,7 +17,17 @@ public struct PrefabSpawnRate
 {
     public string name;
     public GameObject Prefab;
-    public int Amount;
+    public int staticAmount;
+    public AnimationCurve curriculumSpawnRates;
+    int oldAmount;
+
+    public int OldAmount { get => oldAmount; }
+    public void SetAmount(int newAmount)
+    {
+        oldAmount = newAmount;
+    }
+
+
 }
 
 #if UNITY_EDITOR
@@ -24,6 +35,7 @@ public struct PrefabSpawnRate
 [CustomEditor(typeof(WorldSettings))]
 public class WorldSettingsEditor : Editor
 {
+    public AnimationCurve sumCurve;
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
@@ -32,14 +44,32 @@ public class WorldSettingsEditor : Editor
         GUILayout.Label("Number of Tiles: " + (setting.SizeX * setting.SizeY));
         foreach (PrefabSpawnRate prefSpawrate in setting.PrefabSpawnRates)
         {
-            sum += prefSpawrate.Amount;
+            sum += prefSpawrate.staticAmount;
         }
-        if (sum == 100)
-            GUI.color = Color.green;
-        else
-            GUI.color = Color.red;
 
-        GUILayout.Label("Sum of SpawnRates: " + sum + "/100");
+        GUILayout.Label("Sum of StaticSpawnRates: " + sum + "/100");
+
+        if (GUILayout.Button("Update Summed Graph"))
+        {
+            GenerateSumGraph(setting);
+        }
+
+        sumCurve = EditorGUILayout.CurveField("Sum of all SpawnRates", sumCurve, null);
+    }
+
+    void GenerateSumGraph(WorldSettings setting)
+    {
+        float steps = 25;
+        sumCurve = new AnimationCurve();
+
+        for (int i = 0; i < steps; i++)
+        {
+            float sum = 0;
+            foreach (PrefabSpawnRate prefSpawrate in setting.PrefabSpawnRates)
+                sum += prefSpawrate.curriculumSpawnRates.Evaluate(i / steps);
+            sumCurve.AddKey(i/ steps, sum);
+        }
+
     }
 }
 #endif

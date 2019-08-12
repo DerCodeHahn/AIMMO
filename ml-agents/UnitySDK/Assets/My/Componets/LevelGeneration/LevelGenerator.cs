@@ -10,13 +10,17 @@ using System.IO;
 
 public class LevelGenerator : MonoBehaviour
 {
-    readonly string foodRateName = "FoodSpawnRate";
-    readonly string waterRateName = "WaterSpawnRate";
+
 #pragma warning disable 0649
     [SerializeField] WorldSettings worldSetting;
     [SerializeField] bool UseCurriculumWorld;
     GameObject[,] world;
     Transform worldTransfrom;
+
+    public GameObject GetTile(int x, int y)
+    {
+        return world[x, y];
+    }
 
     [SerializeField] SavedSeed seed;
 #pragma warning restore 0649
@@ -47,11 +51,12 @@ public class LevelGenerator : MonoBehaviour
             parentTransform.SetParent(worldTransfrom);
             parentTransform.name = "row" + y;
         }
-        if (MMOAcademy.instance.GetIsInference())
+        // if (MMOAcademy.instance.GetIsInference())
             GenerateBluePrint();
         Regenerate();
     }
 
+    //TODO: Mögliche Speicher Optimierung nur das Löschen was zu viel und auch nur das hinzufügen was gebraucht wird
     void GenerateBluePrint()
     {
         WorldBluePrint = new List<GameObject>();
@@ -61,25 +66,24 @@ public class LevelGenerator : MonoBehaviour
             int amount = 0;
             if (UseCurriculumWorld && !MMOAcademy.instance.GetIsInference())
             {
-                if (prefabSpawnRate.name == "Empty")
-                    continue;
-                else if (prefabSpawnRate.name == waterRateName)
-                    amount = (int)((waterSpawnRate / 100f) * worldSetting.SizeX * worldSetting.SizeY);
-                else if (prefabSpawnRate.name == foodRateName)
-                    amount = (int)((foodSpawnRate / 100f) * worldSetting.SizeX * worldSetting.SizeY);
-                else // Use Default if not in Use
-                    amount = (int)((prefabSpawnRate.Amount / 100f) * worldSetting.SizeX * worldSetting.SizeY);
+                if (MMOAcademy.instance.resetParameters.ContainsKey(prefabSpawnRate.name))
+                {
+                    int currentSpawnRate = (int)MMOAcademy.instance.resetParameters[prefabSpawnRate.name];
+                    amount = (int)((currentSpawnRate / 100f) * worldSetting.SizeX * worldSetting.SizeY);
+                }
+                else// Use Default if not in Use
+                    amount = (int)((prefabSpawnRate.staticAmount / 100f) * worldSetting.SizeX * worldSetting.SizeY);
 
             }
             else
-                amount = (int)((prefabSpawnRate.Amount / 100f) * worldSetting.SizeX * worldSetting.SizeY);
+                amount = (int)((prefabSpawnRate.staticAmount / 100f) * worldSetting.SizeX * worldSetting.SizeY);
             for (int i = 0; i < amount; i++)
                 WorldBluePrint.Add(Instantiate(prefabSpawnRate.Prefab));
 
         }
         while (WorldBluePrint.Count < worldSetting.SizeX * worldSetting.SizeY) //fill With empty
         {
-            WorldBluePrint.Add(Instantiate(worldSetting.PrefabSpawnRates[0].Prefab));
+            WorldBluePrint.Add(Instantiate(worldSetting.emptyTile));
         }
 
     }
@@ -122,20 +126,23 @@ public class LevelGenerator : MonoBehaviour
 
     internal void Regenerate()
     {
-        if (!MMOAcademy.instance.GetIsInference())
+        if (!MMOAcademy.instance.GetIsInference() && UseCurriculumWorld)
         {
-            float newWaterSpawnRate = MMOAcademy.instance.resetParameters[waterRateName];
-            float newFoodSpawnRate = MMOAcademy.instance.resetParameters[foodRateName];
+            bool regenerateBluePrint = false;
 
-            if (waterSpawnRate != newWaterSpawnRate || foodSpawnRate != newFoodSpawnRate)
+            foreach (PrefabSpawnRate spawnRate in WorldSetting.PrefabSpawnRates)
             {
-                waterSpawnRate = newWaterSpawnRate;
-                foodSpawnRate = newFoodSpawnRate;
-                GenerateBluePrint();
+                float newAmount = MMOAcademy.instance.resetParameters[spawnRate.name];
+                if (newAmount != spawnRate.OldAmount)
+                {
+                    spawnRate.SetAmount((int)newAmount);
+                    regenerateBluePrint = true;
+                }
+
             }
+            if (regenerateBluePrint)
+                GenerateBluePrint();
         }
-
-
         Shuffle(WorldBluePrint);
         UpdateWorld();
     }
@@ -145,6 +152,14 @@ public class LevelGenerator : MonoBehaviour
         int x = Mathf.RoundToInt((pos.x + worldSetting.SizeX / 2));
         int y = Mathf.RoundToInt((pos.y + worldSetting.SizeY / 2));
         return world[x, y];
+    }
+    [System.Serializable]
+    public struct ResourceLink
+    {
+        public string NameInCurriculum;
+        float value;
+
+        public float Value { get => value; set => this.value = value; }
     }
 }
 

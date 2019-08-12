@@ -9,14 +9,11 @@ using System;
 [System.Serializable]
 public class GenerateCurriculumWindow : EditorWindow
 {
-    readonly string foodRateName = "FoodSpawnRate";
-    readonly string waterRateName = "WaterSpawnRate";
     public CurriculumData data;
     public float min_lesson_length;
     public int levelCount;
+    public WorldSettings worldSetting;
     public AnimationCurve nextLevelThreshold = AnimationCurve.Linear(0, 0, 10, 10);
-    public AnimationCurve foodSpawnRate = AnimationCurve.Linear(0, 0, 10, 10);
-    public AnimationCurve waterSpawnRate = AnimationCurve.Linear(0, 0, 10, 10);
 
     public string[] variables;
 
@@ -37,6 +34,7 @@ public class GenerateCurriculumWindow : EditorWindow
             data = new CurriculumData();
 
         GUILayout.BeginHorizontal();
+        worldSetting = (WorldSettings)EditorGUILayout.ObjectField("WorldSettings", worldSetting, typeof(WorldSettings), false, null);
         GUILayout.EndHorizontal();
 
         data.min_lesson_length = EditorGUILayout.DelayedIntField("Min Lesson Length", data.min_lesson_length);
@@ -54,8 +52,7 @@ public class GenerateCurriculumWindow : EditorWindow
         GUILayout.EndHorizontal();
 
         nextLevelThreshold = EditorGUILayout.CurveField("Next Level Threshold", nextLevelThreshold);
-        foodSpawnRate = EditorGUILayout.CurveField(foodRateName, foodSpawnRate);
-        waterSpawnRate = EditorGUILayout.CurveField(waterRateName, waterSpawnRate);
+
 
         EditorGUILayout.LabelField("Path : " + XmlPath);
         if (GUILayout.Button("SetPath"))
@@ -63,10 +60,10 @@ public class GenerateCurriculumWindow : EditorWindow
             XmlPath = EditorUtility.OpenFilePanel("Select the XML to Override", "", "json");
         }
 
-        if (GUILayout.Button("Load"))
-        {
-            Load();
-        }
+        // if (GUILayout.Button("Load"))
+        // {
+        //     Load();
+        // }
 
         if (GUILayout.Button("Generate"))
         {
@@ -76,45 +73,48 @@ public class GenerateCurriculumWindow : EditorWindow
 
     }
 
-    private void Load()
-    {
-        string filedata = File.ReadAllText(XmlPath);
-        data = JsonConvert.DeserializeObject<CurriculumData>(filedata);
+    // private void Load()
+    // {
+    //     string filedata = File.ReadAllText(XmlPath);
+    //     data = JsonConvert.DeserializeObject<CurriculumData>(filedata);
 
-        levelCount = data.thresholds.Length + 1;
+    //     levelCount = data.thresholds.Length + 1;
 
-        // Reset old Graphs
-        foodSpawnRate.keys = new Keyframe[0];
-        nextLevelThreshold.keys = new Keyframe[0];
-        waterSpawnRate.keys = new Keyframe[0];
+    //     // Reset old Graphs
+    //     nextLevelThreshold.keys = new Keyframe[0];
+    //     foodSpawnRate.keys = new Keyframe[0];
+    //     waterSpawnRate.keys = new Keyframe[0];
 
-        //Fill with new Data
-        for (int i = 0; i < levelCount; i++)
-        {
-            float amount = i / (levelCount - 1f);
-            nextLevelThreshold.AddKey(amount, data.thresholds[i]);
-            foodSpawnRate.AddKey(amount, data.parameters[foodRateName][i]);
-            waterSpawnRate.AddKey(amount, data.parameters[waterRateName][i]);
-        }
-        Debug.Log("Loaded Selected Data");
-    }
+    //     //Fill with new Data
+    //     for (int i = 0; i < levelCount; i++)
+    //     {
+    //         float amount = i / (levelCount - 1f);
+    //         nextLevelThreshold.AddKey(amount, data.thresholds[i]);
+
+    //         foodSpawnRate.AddKey(amount, data.parameters[foodRateName][i]);
+    //         waterSpawnRate.AddKey(amount, data.parameters[waterRateName][i]);
+    //     }
+    //     Debug.Log("Loaded Selected Data");
+    // }
 
     void Save()
     {
         data.thresholds = new float[levelCount - 1];
-        data.parameters.Remove(foodRateName); // Empty data
-        data.parameters.Remove(waterRateName);
-
-        data.parameters.Add(foodRateName, new float[levelCount]);
-        data.parameters.Add(waterRateName, new float[levelCount]);
-
+        foreach (PrefabSpawnRate spawnRate in worldSetting.PrefabSpawnRates)
+        {
+            data.parameters.Remove(spawnRate.name);
+            data.parameters.Add(spawnRate.name, new float[levelCount]);
+        }
+        
         for (int i = 0; i < levelCount; i++)
         {
             float amount = (float)i / (float)(levelCount - 1);
             if (i < levelCount - 1)
                 data.thresholds[i] = nextLevelThreshold.Evaluate(amount);
-            data.parameters[foodRateName][i] = foodSpawnRate.Evaluate(amount);
-            data.parameters[waterRateName][i] = waterSpawnRate.Evaluate(amount);
+            foreach (PrefabSpawnRate spawnRate in worldSetting.PrefabSpawnRates)
+            {
+                data.parameters[spawnRate.name][i] = spawnRate.curriculumSpawnRates.Evaluate(amount);
+            }
         }
         string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
         StreamWriter fileStream = File.CreateText(XmlPath);
